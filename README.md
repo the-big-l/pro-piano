@@ -23,7 +23,7 @@ In addition, this project will include:
 
 This app will consist of a two-octave keyboard on the left side which can be played by clicking on the keys. To the right will be the piano roll consisting of blocks of 16th notes which can be selected by the user. Click and drag will be implemented as continuous notes, while individual selection will by new keyboard hits. The top will have play, stop, and reset buttons along with preset songs.
 
-![wireframes](assets/pro_piano_wireframe.svg)
+![wireframes](assets/pro_piano_wireframe.png)
 
 ### Architecture and Technologies
 
