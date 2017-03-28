@@ -1,13 +1,6 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background-image: url('./assets/images/wood_floor.jpg');
-}
-
 ul.piano {
+  box-sizing: border-box;
+  margin: 16px;
   height: 31em;
   width: 9.4375em;
   padding: 1.5em 0 0 1.5em;
