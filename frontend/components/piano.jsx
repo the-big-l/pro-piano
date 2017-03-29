@@ -8,7 +8,9 @@ class Piano extends React.Component {
   }
 
   render() {
-    const pianoKeys = this.props.pianoKeys.map(({key, src}) => <PianoKey pianoKey={key} src={src} key={key} />);
+    const pianoKeys = this.props.pianoKeys.map(({keyClass, note, src}) => {
+      return <PianoKey keyClass={keyClass} note={note} src={src} key={note} />;
+    });
 
     return (
       <ul className="piano">
