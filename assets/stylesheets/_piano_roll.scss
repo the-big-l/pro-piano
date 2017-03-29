@@ -1,0 +1,42 @@
+ul.piano-roll {
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  padding-top: 1.5em;
+  margin-top: 16px;
+  width: 100%;
+
+  .lane-wrapper {
+    position: relative;
+
+    .beat-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .beat {
+        float: left;
+        width: 1em;
+        height: 1em;
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.38) inset, -1px 1px 0px 1px rgba(255, 255, 255, 0.38) inset;
+        border-radius: 4px;
+
+        &:hover {
+          background: rgba(240, 248, 255, 0.25);
+          box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.38) inset, -1px 1px 0px 1px rgba(255, 255, 255, 0.38) inset
+          // , -14px 20px 7px 0px rgba(0, 0, 0, 0.71);
+        }
+      }
+    }
+  }
+
+  li {
+    height: 1em;
+    width: 100%;
+
+    &.lane {
+      // box-shadow: 0px -2px 3px 0.5px rgba(255, 255, 255, 0.18) inset, 0px 2px 3px 1px rgba(0, 0, 0, 0.8) inset, -14px 20px 7px 0px rgba(0, 0, 0, 0.1);;
+      // inverted
+      // box-shadow: 0 -1px 0.5px rgba(0, 0, 0, 0.38) inset, 0px 1px 0.5px 0px rgba(255, 255, 255, 0.38) inset, -14px 20px 7px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

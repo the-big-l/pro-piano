@@ -1,4 +1,9 @@
 body {
   margin: 0;
   background-image: url('./assets/images/wood_floor.jpg');
+  background-position: center;
+}
+
+.app {
+  display: flex;
 }
