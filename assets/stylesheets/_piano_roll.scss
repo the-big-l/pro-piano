@@ -1,9 +1,12 @@
 ul.piano-roll {
+  box-sizing: border-box;
   border-top: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid rgba(0, 0, 0, 0);
   padding-top: 1.5em;
   margin-top: 16px;
   width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
 
   .lane-wrapper {
     position: relative;
@@ -14,26 +17,49 @@ ul.piano-roll {
       left: 0;
 
       .beat {
-        float: left;
+        display: inline-block;
         width: 1em;
         height: 1em;
+        border-radius: 3px;
 
         &.pitch {
           // box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.38) inset, -1px 1px 0px 1px rgba(255, 255, 255, 0.38) inset;
-          box-shadow: 0.5px -0.5px 0px 0.5px rgba(0, 0, 0, 0.38) inset, -0.5px 0.5px 0px 0.5px rgba(255, 255, 255, 0.38) inset;
-          border-radius: 0;
+          // box-shadow: 0.5px -0.5px 0px 0.5px rgba(0, 0, 0, 0.38) inset, -0.5px 0.5px 0px 0.5px rgba(255, 255, 255, 0.38) inset;
+          // box-shadow: 0.5px -0.5px 0px 0.5px rgba(0, 0, 0, 0.38) inset, -0.5px 0.5px 0px 0.5px rgba(255, 255, 255, 0.38) inset;
+          border-top: 0.5px solid rgba(255, 255, 255, 0.38);
+          border-bottom: .5px solid rgba(0, 0, 0, 0.38);
+          border-left: .5px solid rgba(0, 0, 0, 0.38);
+          border-right: .5px solid rgba(255, 255, 255, 0.38);
+
+          &.active {
+            background: rgba(240, 248, 255, 0.25);
+          }
+
+          &.start {
+            border-right: none;
+          }
+
+          &.middle {
+            border-left:  none;
+            border-right: none;
+          }
+
+          &.end {
+            border-left: none;
+          }
+
+          &:hover {
+            background: rgba(240, 248, 255, 0.25);
+            // box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.38) inset, -1px 1px 0px 1px rgba(255, 255, 255, 0.38) inset;
+            // box-shadow: 0.5px -0.5px 0px 0.5px rgba(0, 0, 0, 0.38) inset, -0.5px 0.5px 0px 0.5px rgba(255, 255, 255, 0.38) inset;
+            // , -14px 20px 7px 0px rgba(0, 0, 0, 0.71);
+          }
         }
 
         &:nth-of-type(4n+1) {
-          margin-left: 0.1em;
+          margin-left: 0;
         }
 
-        &:hover {
-          background: rgba(240, 248, 255, 0.25);
-          // box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.38) inset, -1px 1px 0px 1px rgba(255, 255, 255, 0.38) inset;
-          box-shadow: 0.5px -0.5px 0px 0.5px rgba(0, 0, 0, 0.38) inset, -0.5px 0.5px 0px 0.5px rgba(255, 255, 255, 0.38) inset;
-          // , -14px 20px 7px 0px rgba(0, 0, 0, 0.71);
-        }
       }
     }
   }
