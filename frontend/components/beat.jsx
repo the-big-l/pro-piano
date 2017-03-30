@@ -1,46 +1,74 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-        setDragging,
-        setPitch,
-        setStartPos,
-        setMousePos,
-        setEndPos,
-        createNote,
-        clearNote } from '../actions/beat_actions';
+import {numBetween} from '../util/math_util';
 
 class Beat extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activeNote: false,
+      location: null
+    }
+    this.handleMouseUp = this.handleMouseUp.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
   }
 
   handleMouseDown() {
-    this.props.setDragging(true);
-    this.props.setPitch(this.props.pitch);
-    this.props.setStartPos(this.props.pos);
+    this.props.util.setDragging(true);
+    this.props.util.setPitch(this.props.pitch);
+    this.props.util.setStartPos(this.props.pos);
   }
 
   handleMouseOver() {
-    this.props.setMousePos(this.props.pos);
+    this.props.util.setMousePos(this.props.pos);
   }
 
   handleMouseUp() {
-    this.props.setDragging(false);
-    this.props.setEndPos(this.props.pos);
-    this.props.createNote(this.props.computedNote);
-    this.props.clearNote();
+    this.props.util.setDragging(false);
+    this.props.util.setEndPos(this.props.pos);
+    this.calculatePos();
   }
 
-  activeNote() {
-    if (this.props.computedNote)
-    return null;
+  calculatePos() {
+    const first = this.props.computedNote.startPos;
+    const last = this.props.computedNote.endPos;
+    const num = this.props.pos;
+
+    if (this.props.pitch === this.props.computedNote.pitch && numBetween(num, first, last)) {
+      this.setState({activeNote: 'active'});
+      if (this.props.pos === this.props.computedNote.startPos) {
+        this.setState({location: 'start'});
+      } else if (this.props.pos === this.props.computedNote.endPos) {
+        this.setState({location: 'end'});
+      } else {
+        this.setState({location: 'middle'});
+      }
+    }
+
+    // this.props.util.clearNote();
   }
 
-  noteLocation() {
-    return null;
+  currentLocation() {
+    if (this.currentActiveNote() === 'active' && this.props.pitch === this.props.computedNote.pitch) {
+      if (this.props.pos === this.props.computedNote.startPos) {
+        return 'start';
+      } else if (this.props.pos === this.props.computedNote.currentPos) {
+        return 'end';
+      } else {
+        return 'middle';
+      }
+    }
+  }
+
+  currentActiveNote() {
+    const first = this.props.computedNote.startPos;
+    const last = this.props.computedNote.currentPos;
+    const num = this.props.pos;
+
+    if (numBetween(num, first, last) && this.props.pitch === this.props.computedNote.pitch) {
+      return 'active';
+    }
   }
 
   render() {
@@ -51,27 +79,12 @@ class Beat extends React.Component {
         onMouseUp={this.handleMouseUp}
         data-pos={this.props.pos}
         data-pitch={this.props.pitch}
-        className={`${this.props.beatClass} ${this.activeNote} ${this.noteLocation}`}>
+        className={`${this.props.beatClass} ${this.state.activeNote} ${this.state.location} ${this.currentActiveNote()} ${this.currentLocation()}`}>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({computedNote}) => ({
-  computedNote
-});
 
-const mapDispatchToProps = dispatch => ({
-  setDragging: dragging => dispatch(setDragging(dragging)),
-  setPitch: pitch => dispatch(setPitch(pitch)),
-  setStartPos: startPos => dispatch(setStartPos(startPos)),
-  setMousePos: currentPos => dispatch(setMousePos(currentPos)),
-  setEndPos: endPos => dispatch(setEndPos(endPos)),
-  createNote: note => dispatch(createNote(note)),
-  clearNote: () => dispatch(clearNote())
-});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Beat);
+export default Beat;
