@@ -6,7 +6,6 @@ const _emptyRoll = [];
 const rollReducer = (state = _emptyRoll, action) => {
   switch(action.type) {
     case CREATE_NOTE:
-    console.log(state);
       return [...state, action.note];
     default:
       return state;
