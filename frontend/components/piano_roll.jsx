@@ -9,10 +9,12 @@ class PianoRoll extends React.Component {
 
   render() {
     const lanes = [];
-    this.props.pianoKeys.forEach(({keyClass, note}, idx) => {
-      lanes.push(<PianoLane key={note} note={note} type={'lane'} />);
+    this.props.pianoKeys.forEach(({keyClass, pitch}, idx) => {
+
+      lanes.push(<PianoLane key={pitch} pitch={pitch} type={'lane'} />);
+
       if (keyClass.includes('white c') || keyClass.includes('white f')) {
-        lanes.push(<PianoLane key={`${note}sp`} type={'spacer'} />);
+        lanes.push(<PianoLane key={`${pitch}sp`} pitch={pitch} type={'spacer'} />);
       }
     });
 
