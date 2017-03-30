@@ -32,20 +32,25 @@ ul.piano-roll {
           border-right: .5px solid rgba(255, 255, 255, 0.38);
 
           &.active {
-            background: rgba(240, 248, 255, 0.25);
+            background: rgb(197, 202, 233);
           }
 
           &.start {
             border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
           }
 
           &.middle {
             border-left:  none;
             border-right: none;
+            border-radius: 0;
           }
 
           &.end {
             border-left: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
           }
 
           &:hover {
