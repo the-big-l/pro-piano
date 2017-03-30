@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import Beat from './beat';
 
 class PianoLane extends React.Component {
   constructor(props) {
@@ -8,14 +8,17 @@ class PianoLane extends React.Component {
 
   render() {
     const beats = [];
-    for (var i = 0; i < 16; i++) {
-      if (this.props.type !== 'spacer') {
-        beats.push(<div key={`${this.props.note}${i}`} data-note={this.props.note} className='beat'></div>);
+    for (var i = 0; i < 32; i++) {
+      if (this.props.type === 'spacer') {
+        beats.push(<Beat key={`${this.props.pitch}${i}sp`} pitch='spacer' pos={i} beatClass='beat sp' />);
+      } else {
+        beats.push(<Beat key={`${this.props.pitch}${i}`} pitch={this.props.pitch} pos={i} beatClass='beat pitch' />);
       }
     }
+
     return (
       <div className='lane-wrapper'>
-        <li className={this.props.type}></li>
+        <li data-pitch={this.props.pitch} className={this.props.type}></li>
         <div className='beat-wrapper'>
           {beats}
         </div>
