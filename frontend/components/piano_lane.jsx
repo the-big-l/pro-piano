@@ -10,9 +10,9 @@ class PianoLane extends React.Component {
     const beats = [];
     for (var i = 0; i < 32; i++) {
       if (this.props.type === 'spacer') {
-        beats.push(<Beat key={`${this.props.pitch}${i}sp`} pitch='spacer' pos={i} beatClass='beat sp' />);
+        beats.push(<Beat key={`${this.props.pitch}${i}sp`} util={this.props.util} computedNote={this.props.computedNote} pitch='spacer' pos={i} beatClass='beat sp' />);
       } else {
-        beats.push(<Beat key={`${this.props.pitch}${i}`} pitch={this.props.pitch} pos={i} beatClass='beat pitch' />);
+        beats.push(<Beat key={`${this.props.pitch}${i}`} util={this.props.util} computedNote={this.props.computedNote} pitch={this.props.pitch} pos={i} beatClass='beat pitch' />);
       }
     }
 
