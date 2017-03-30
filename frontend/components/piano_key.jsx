@@ -7,7 +7,7 @@ class PianoKey extends React.Component {
   }
 
   componentDidMount() {
-    this.sound = document.getElementById(this.props.note);
+    this.sound = document.getElementById(this.props.pitch);
   }
 
   mouseDown(e) {
@@ -22,7 +22,7 @@ class PianoKey extends React.Component {
           onMouseDown={this.mouseDown}
           className={this.props.keyClass}>
         </li>
-        <audio id={this.props.note} preload='auto' src={this.props.src}></audio>
+        <audio id={this.props.pitch} preload='auto' src={this.props.src}></audio>
       </div>
     );
   }
