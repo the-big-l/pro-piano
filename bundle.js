@@ -4933,6 +4933,7 @@ var SET_MOUSE_POS = exports.SET_MOUSE_POS = 'SET_MOUSE_POS';
 var SET_END_POS = exports.SET_END_POS = 'SET_END_POS';
 var CREATE_NOTE = exports.CREATE_NOTE = 'CREATE_NOTE';
 var CLEAR_NOTE = exports.CLEAR_NOTE = 'CLEAR_NOTE';
+var CLEAR_ROLL = exports.CLEAR_ROLL = 'CLEAR_ROLL';
 
 var setDragging = exports.setDragging = function setDragging(dragging) {
   return {
@@ -4979,6 +4980,12 @@ var createNote = exports.createNote = function createNote(note) {
 var clearNote = exports.clearNote = function clearNote() {
   return {
     type: CLEAR_NOTE
+  };
+};
+
+var clearRoll = exports.clearRoll = function clearRoll() {
+  return {
+    type: CLEAR_ROLL
   };
 };
 
@@ -12067,8 +12074,9 @@ var rollReducer = function rollReducer() {
   switch (action.type) {
     case _beat_actions.CREATE_NOTE:
       newState[action.note.pitch].push(action.note);
-      console.log(newState);
       return newState;
+    case _beat_actions.CLEAR_ROLL:
+      return createEmptyRoll();
     default:
       return state;
   }
@@ -27743,6 +27751,8 @@ var _player_pitch = __webpack_require__(328);
 
 var _player_pitch2 = _interopRequireDefault(_player_pitch);
 
+var _beat_actions = __webpack_require__(44);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27768,6 +27778,7 @@ var Player = function (_React$Component) {
     _this.state = blankBeat;
     _this.play = _this.play.bind(_this);
     _this.stop = _this.stop.bind(_this);
+    _this.reset = _this.reset.bind(_this);
     return _this;
   }
 
@@ -27835,6 +27846,11 @@ var Player = function (_React$Component) {
       clearInterval(this.song);
     }
   }, {
+    key: 'reset',
+    value: function reset() {
+      this.props.clearRoll();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this4 = this;
@@ -27862,7 +27878,7 @@ var Player = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          null,
+          { onClick: this.reset },
           'Reset'
         ),
         _react2.default.createElement(
@@ -27884,7 +27900,15 @@ var mapStateToProps = function mapStateToProps(_ref2) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Player);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    clearRoll: function clearRoll() {
+      return dispatch((0, _beat_actions.clearRoll)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Player);
 
 /***/ }),
 /* 328 */
