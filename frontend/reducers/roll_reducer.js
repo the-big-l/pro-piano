@@ -1,4 +1,4 @@
-import { CREATE_NOTE } from '../actions/beat_actions';
+import { CREATE_NOTE, CLEAR_ROLL } from '../actions/beat_actions';
 import {keyData} from '../util/piano_keys';
 import merge from 'lodash/merge';
 
@@ -15,8 +15,9 @@ const rollReducer = (state = createEmptyRoll(), action) => {
   switch(action.type) {
     case CREATE_NOTE:
       newState[action.note.pitch].push(action.note);
-      console.log(newState);
       return newState;
+    case CLEAR_ROLL:
+      return createEmptyRoll();
     default:
       return state;
   }
