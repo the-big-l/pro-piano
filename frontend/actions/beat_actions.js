@@ -5,6 +5,7 @@ export const SET_MOUSE_POS = 'SET_MOUSE_POS';
 export const SET_END_POS = 'SET_END_POS';
 export const CREATE_NOTE = 'CREATE_NOTE';
 export const CLEAR_NOTE = 'CLEAR_NOTE';
+export const CLEAR_ROLL = 'CLEAR_ROLL';
 
 
 export const setDragging = dragging => ({
@@ -39,4 +40,8 @@ export const createNote = note => ({
 
 export const clearNote = () => ({
   type: CLEAR_NOTE
+});
+
+export const clearRoll = () => ({
+  type: CLEAR_ROLL
 });
