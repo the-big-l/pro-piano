@@ -1,4 +1,4 @@
-const keyData = [
+export const keyData = [
   {keyClass: "white c", pitch: 'c5', src: 'https://s3-us-west-1.amazonaws.com/pro-piano/assets/audio/C5v16.mp3'},
   {keyClass: "white b", pitch: 'b4', src: 'https://s3-us-west-1.amazonaws.com/pro-piano/assets/audio/B4v16.mp3'},
   {keyClass: "black as", pitch: 'as4', src: 'https://s3-us-west-1.amazonaws.com/pro-piano/assets/audio/A%234v16.mp3'},
@@ -26,4 +26,4 @@ const keyData = [
   {keyClass: "white c", pitch: 'c3', src: 'https://s3-us-west-1.amazonaws.com/pro-piano/assets/audio/C3v16.mp3'}
 ];
 
-export default keyData;
+export const rollLength = 32;
