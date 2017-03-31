@@ -5,10 +5,6 @@ import {numBetween} from '../util/math_util';
 class Beat extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeNote: false,
-      location: null
-    }
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -27,33 +23,16 @@ class Beat extends React.Component {
   handleMouseUp() {
     this.props.util.setDragging(false);
     this.props.util.setEndPos(this.props.pos);
-    this.calculatePos();
-  }
-
-  calculatePos() {
-    const first = this.props.computedNote.startPos;
-    const last = this.props.computedNote.endPos;
-    const num = this.props.pos;
-
-    if (this.props.pitch === this.props.computedNote.pitch && numBetween(num, first, last)) {
-      this.setState({activeNote: 'active'});
-      if (this.props.pos === this.props.computedNote.startPos) {
-        this.setState({location: 'start'});
-      } else if (this.props.pos === this.props.computedNote.endPos) {
-        this.setState({location: 'end'});
-      } else {
-        this.setState({location: 'middle'});
-      }
-    }
-
-    // this.props.util.clearNote();
   }
 
   currentLocation() {
-    if (this.currentActiveNote() === 'active' && this.props.pitch === this.props.computedNote.pitch) {
-      if (this.props.pos === this.props.computedNote.startPos) {
+    const first = Math.min(this.props.computedNote.startPos, this.props.computedNote.currentPos);
+    const last = Math.max(this.props.computedNote.startPos, this.props.computedNote.currentPos);
+
+    if (this.isActive()) {
+      if (this.props.pos === first) {
         return 'start';
-      } else if (this.props.pos === this.props.computedNote.currentPos) {
+      } else if (this.props.pos === last) {
         return 'end';
       } else {
         return 'middle';
@@ -61,12 +40,36 @@ class Beat extends React.Component {
     }
   }
 
-  currentActiveNote() {
+  isActive() {
+    return this.isCurrentlyActive() || this.isNoteCreated();
+  }
+
+  isNoteCreated() {
+    let noteCreated = false;
+
+    this.props.pianoRoll[this.props.pitch].forEach(note => {
+      const first = note.startPos;
+      const last = note.endPos;
+      const num = this.props.pos;
+
+      if (numBetween(num, first, last)) {
+        noteCreated = true;
+      }
+    });
+
+    return noteCreated;
+  }
+
+  isCurrentlyActive() {
     const first = this.props.computedNote.startPos;
     const last = this.props.computedNote.currentPos;
     const num = this.props.pos;
 
-    if (numBetween(num, first, last) && this.props.pitch === this.props.computedNote.pitch) {
+    return (numBetween(num, first, last) && this.props.pitch === this.props.computedNote.pitch);
+  }
+
+  activeClass() {
+    if (this.isActive()) {
       return 'active';
     }
   }
@@ -79,12 +82,14 @@ class Beat extends React.Component {
         onMouseUp={this.handleMouseUp}
         data-pos={this.props.pos}
         data-pitch={this.props.pitch}
-        className={`${this.props.beatClass} ${this.state.activeNote} ${this.state.location} ${this.currentActiveNote()} ${this.currentLocation()}`}>
+        className={`${this.props.beatClass} ${this.activeClass()} ${this.currentLocation()}`}>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({pianoRoll}) => ({
+  pianoRoll
+});
 
-
-export default Beat;
+export default connect(mapStateToProps)(Beat);
