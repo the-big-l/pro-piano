@@ -91,9 +91,11 @@ body {
 .app {
   display: flex;
   flex-direction: column;
-  padding: 32px; }
+  padding: 32px;
+  align-items: center; }
   .app .main {
-    display: flex; }
+    display: flex;
+    width: 800px; }
 
 ul.piano {
   box-sizing: border-box;

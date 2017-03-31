@@ -8,8 +8,10 @@ body {
   display: flex;
   flex-direction: column;
   padding: 32px;
+  align-items: center;
 
   .main {
     display: flex;
+    width: 800px;
   }
 }
