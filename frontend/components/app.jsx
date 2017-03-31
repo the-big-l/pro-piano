@@ -1,11 +1,15 @@
 import React from 'react';
 import Piano from './piano';
 import PianoRoll from './piano_roll';
+import Player from './player';
 
 const App = () => (
   <div className='app'>
-    <Piano />
-    <PianoRoll />
+    <Player />
+    <div className='main'>
+      <Piano />
+      <PianoRoll />
+    </div>
   </div>
 );
 
