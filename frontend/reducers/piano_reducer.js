@@ -1,4 +1,4 @@
-import keyData from '../util/piano_keys';
+import {keyData} from '../util/piano_keys';
 
 const pianoReducer = (state = keyData, action) => {
   return keyData;
