@@ -41,7 +41,10 @@ class PianoRoll extends React.Component {
   }
 
   setEndPos(endPos) {
-    this.setState({endPos}, () => this.props.createNote(this.state));
+    this.setState({endPos}, () => {
+      this.props.createNote(this.state);
+      this.clearNote();
+    });
   }
 
   clearNote() {
