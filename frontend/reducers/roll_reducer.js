@@ -1,5 +1,5 @@
 import { CREATE_NOTE } from '../actions/beat_actions';
-import keyData from '../util/piano_keys';
+import {keyData} from '../util/piano_keys';
 import merge from 'lodash/merge';
 
 function createEmptyRoll() {
