@@ -33,6 +33,7 @@ ul.piano-roll {
 
           &.active {
             background: rgb(197, 202, 233);
+            box-shadow: -14px 20px 6px 0 rgba(0, 0, 0, 0.55);
           }
 
           &.start {

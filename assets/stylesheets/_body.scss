@@ -6,4 +6,10 @@ body {
 
 .app {
   display: flex;
+  flex-direction: column;
+  padding: 32px;
+
+  .main {
+    display: flex;
+  }
 }
