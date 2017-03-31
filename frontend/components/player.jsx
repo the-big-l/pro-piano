@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {keyData, rollLength} from '../util/piano_keys';
 import PlayerPitch from './player_pitch';
+import {clearRoll} from '../actions/beat_actions';
 
 class Player extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Player extends React.Component {
     this.state = blankBeat;
     this.play = this.play.bind(this);
     this.stop = this.stop.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   // array of pitch statuses, each beat will set state, play, continue, or stop
@@ -71,6 +73,10 @@ class Player extends React.Component {
     clearInterval(this.song);
   }
 
+  reset() {
+    this.props.clearRoll();
+  }
+
   render() {
     const pitches = keyData.map(({keyClass, pitch, src}) => {
       return <PlayerPitch pitch={pitch} src={src} key={pitch} status={this.state[pitch]} />;
@@ -80,7 +86,7 @@ class Player extends React.Component {
       <div className='player'>
         <button onClick={this.play}>Play</button>
         <button onClick={this.stop}>Stop</button>
-        <button>Reset</button>
+        <button onClick={this.reset}>Reset</button>
         <div className='sound-bank'>
           {pitches}
         </div>
@@ -93,4 +99,11 @@ const mapStateToProps = ({pianoRoll}) => ({
   pianoRoll
 });
 
-export default connect(mapStateToProps)(Player);
+const mapDispatchToProps = dispatch => ({
+  clearRoll: () => dispatch(clearRoll())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
