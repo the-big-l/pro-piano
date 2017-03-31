@@ -6,8 +6,8 @@
 
 
 # Temporarily ignore bundle.js/index.css until ready for prod
-bundle.js
-index.css
+# bundle.js
+# index.css
 
 # Ignore all logfiles and tempfiles.
 /log/*
