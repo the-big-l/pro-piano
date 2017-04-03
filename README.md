@@ -5,8 +5,8 @@
 ## Features
 
 - Play the piano by clicking on the keys
-- Select notes to be played by the piano
-- Start, stop, and reset your tune
+- Select notes to be played by the piano by clicking and dragging
+- Ability to start, stop, and reset your tune
 - Elegant styling
 
 ### Piano
@@ -34,6 +34,7 @@ Prelude utilizes the following technologies:
 
 - React.js
 - Redux
+- JavaScript ES6
 - HTML5
 - CSS3
 - Redux
@@ -42,40 +43,22 @@ Prelude utilizes the following technologies:
 
 
 ### React/Redux
+
   React and Redux were used on the frontend to create modular components with easy to use apis and a single source of truth for the apps current state.
 
   Piano keys and the audio are created by iterating over the key-data object which contains the pitch and audio sources. The components are reused for each key but with different props being passed down.
+  
+### JavaScript
 
+JavaScript was used to prepare the user generated notes to ensure that they were synchronized with each beat. On creation, notes were stored in a pianoRoll, which was an object with keys for each pitch. Each key corresponded to an array of the individual notes each of which had a start and stop position for when to play the note.
+
+The player itself took in a computedRoll, which was an array of 'beats'. Currently, there are 32 quarter-note beats in the roll. Each beat was an object of pitches which corresponded to a 'play', 'continue', or 'stop' command. To prepare the notes for the player, the pianoRoll object was iterated over and each of the 32 'beats' were updated with one of the three commands.
+
+On play, the state which consisted of the current beat, was updated every 250ms with the new beat. As the commands changed for each pitch, the audio would update accordingly.
 
 ### SASS
 Thoughtful class names allowed reusable styling. Styling was organized by nesting CSS rules which is supported by the use of SASS.
 
-  ```css
-  ul.piano-roll {
-    box-sizing: border-box;
-    border-top: 1px solid rgba(0, 0, 0, 0);
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    padding-top: 1.5em;
-    margin-top: 16px;
-    width: 100%;
-    white-space: nowrap;
-    overflow-x: scroll;
-
-    .lane-wrapper {
-      position: relative;
-
-      .beat-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        .beat {
-          display: inline-block;
-          width: 1em;
-          height: 1em;
-          border-radius: 3px;
-          ...
-```
 
 ## Future
 
