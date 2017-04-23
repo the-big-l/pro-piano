@@ -63,8 +63,8 @@ pids
 node_modules/
 
 # Ignore bundle
-bundle.js.map
+# bundle.js.map
 
 # SASS
 .sass-cache/
-index.css.map
+# index.css.map
