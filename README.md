@@ -30,7 +30,7 @@ Listen to your creation by clicking the play button.
 
 ## Implementation
 
-Prelude utilizes the following technologies:
+Pro Piano utilizes the following technologies:
 
 - React.js
 - Redux
